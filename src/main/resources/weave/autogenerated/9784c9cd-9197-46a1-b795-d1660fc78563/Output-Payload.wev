@@ -1,0 +1,18 @@
+%dw 2.0
+
+type auto_9784c9cd_9197_46a1_b795_d1660fc78563_Output_Payload = {|
+  application: {| name: String |}, 
+  api: {|
+    name: String, 
+    id: String, 
+    version: String
+  |}, 
+  environment: {| name: String |}, 
+  log: {| baseCategory: String |}, 
+  status: {|
+    result: String, 
+    details: String
+  |}, 
+  timestamp: DateTime
+|}
+

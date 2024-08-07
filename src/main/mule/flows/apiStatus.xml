@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+	<flow name="getApiStatusFlow" doc:id="9784c9cd-9197-46a1-b795-d1660fc78563" >
+		<logger level="INFO" doc:name="Logger" doc:id="4f9888ba-59cf-4e85-b899-72113fff6f12" message="test" category="${mule.env}.apiStatus.getApiStatusFlow.flowEndPayload"/>
+		<set-payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	"application": {&#10;		"name": p("app.name")&#10;	},&#10;	"api": {&#10;    	"name": p("api.name"),&#10;		"id": p("api.id"),&#10;	    "version": p("api.version")&#10;   	},&#10;    "environment": {&#10;		"name": p("mule.env")&#10;	},&#10;	"log": {&#10;		"baseCategory": p("log.baseCategory")&#10;	},&#10;    "status": {&#10;		"result": "pass",&#10;	    "details": "API is healthy"&#10;    },&#10;    &#10;	"timestamp": now()&#10;}]' doc:name="Set API Status" doc:id="cda971f7-8326-42ac-953e-93ce262477f0" />
+		<logger level="DEBUG" doc:name="Log flowEnd Payload" doc:id="c05441cc-6ae4-4a97-94c6-7c868bbe977c" category="${mule.env}.apiStatus.getApiStatus.flowEndePayload" message="#[%dw 2.0
+output application/json
+---
+payload]"/>
+	</flow>
+</mule>
